@@ -34,25 +34,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_021155) do
   create_table "order_details", force: :cascade do |t|
     t.decimal "price"
     t.integer "quantity"
-    t.integer "order_id_id", null: false
-    t.integer "laptop_id_id", null: false
+    t.integer "orders_id", null: false
+    t.integer "laptops_id", null: false
     t.decimal "discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["laptop_id_id"], name: "index_order_details_on_laptop_id_id"
-    t.index ["order_id_id"], name: "index_order_details_on_order_id_id"
+    t.index ["laptops_id"], name: "index_order_details_on_laptops_id"
+    t.index ["orders_id"], name: "index_order_details_on_orders_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.decimal "price_total"
     t.string "status"
-    t.integer "customer_id_id", null: false
+    t.integer "customers_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id_id"], name: "index_orders_on_customer_id_id"
+    t.index ["customers_id"], name: "index_orders_on_customers_id"
   end
 
-  add_foreign_key "order_details", "laptop_ids"
-  add_foreign_key "order_details", "order_ids"
-  add_foreign_key "orders", "customer_ids"
+  add_foreign_key "order_details", "laptops", column: "laptops_id"
+  add_foreign_key "order_details", "orders", column: "orders_id"
+  add_foreign_key "orders", "customers", column: "customers_id"
 end
