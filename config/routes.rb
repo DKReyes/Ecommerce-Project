@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'order_details/index'
+  get 'order_details/show'
   get 'customers/index'
   get 'customers/show'
   get 'laptops/index'
