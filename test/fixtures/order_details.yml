@@ -3,9 +3,13 @@
 one:
   price: 9.99
   quantity: 1
+  order_id: one
+  laptop_id: one
   discount: 9.99
 
 two:
   price: 9.99
   quantity: 1
+  order_id: two
+  laptop_id: two
   discount: 9.99
