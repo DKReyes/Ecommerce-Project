@@ -30,6 +30,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_163959) do
 
   create_table "laptops", force: :cascade do |t|
     t.string "name"
+    t.string "cpu"
+    t.string "gpu"
+    t.string "storage"
+    t.decimal "display"
     t.decimal "price"
     t.integer "stock"
     t.decimal "discount"

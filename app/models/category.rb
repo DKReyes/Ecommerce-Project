@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :laptops
+  has_many :laptop
 
   validates :name, presence: true
 end
