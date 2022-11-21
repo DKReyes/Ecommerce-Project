@@ -9,6 +9,7 @@
 require 'csv'
 require 'faker'
 
+AdminUser.destroy_all
 Laptop.destroy_all
 Category.destroy_all
 
@@ -45,3 +46,4 @@ end
 #   )
 # end
 
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

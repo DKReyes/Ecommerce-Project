@@ -45,6 +45,10 @@ gem "bootsnap", require: false
 # Faker
 gem 'faker'
 
+# ActiveAdmin
+gem 'activeadmin'
+gem 'devise'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
