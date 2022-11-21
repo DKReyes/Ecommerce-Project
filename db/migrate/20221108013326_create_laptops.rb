@@ -5,6 +5,7 @@ class CreateLaptops < ActiveRecord::Migration[7.0]
       t.decimal :price
       t.integer :stock
       t.decimal :discount
+      t.references :category, null: false, foreign_key: true
 
       t.timestamps
     end
