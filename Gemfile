@@ -49,11 +49,14 @@ gem 'faker'
 gem 'activeadmin'
 gem 'devise'
 
+# CSS Framework (Bulma)
+gem "bulma-rails", "~> 0.9.4"
+
 # Use Sass to process CSS
 gem "sassc-rails"
 
-# CSS Framework (Bulma)
-gem "bulma-rails"
+# Kaminari (Pagnation)
+gem 'kaminari'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

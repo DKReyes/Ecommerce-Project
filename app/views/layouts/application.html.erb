@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Project</title>
+    <title>Laptop Labs</title>
+    <%= favicon_link_tag asset_path('main/icon_logo.png') %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,5 +15,6 @@
   <body>
     <%= render "layouts/navigation" %>
     <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

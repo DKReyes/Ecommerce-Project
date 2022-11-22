@@ -1,4 +1,6 @@
 class Laptop < ApplicationRecord
+  default_per_page
+
   has_many :order
   belongs_to :category
 
