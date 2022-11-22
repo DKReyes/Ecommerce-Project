@@ -1,9 +1,14 @@
 class LaptopsController < ApplicationController
+  add_breadcrumb "Home", :root_path
+
   def index
+    add_breadcrumb "Laptops", index_path
     @laptops = Laptop.page(params[:page])
   end
 
   def show
+    add_breadcrumb "Laptops", index_path
+    add_breadcrumb "index",
     @laptop = Laptop.includes(:category).find(params[:id])
   end
 

@@ -17,6 +17,8 @@
     <div class="section">
       <div class="container">
         <%= render "layouts/search" %>
+        <br>
+        <%= render_breadcrumbs :separator => ' > ' %>
         <%= yield %>
       </div>
     </div>

@@ -24,4 +24,7 @@ Rails.application.routes.draw do
       get "search"
     end
   end
+
+  get "categories/index"
+  get "categories/:id", to: "categories#show", as: "category"
 end

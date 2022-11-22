@@ -1,2 +1,14 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<p class="title is-2">All <%= @category.name %> Items</p>
+<p class="subtitle is-4"><%= @laptops.count %> Search Results Found.</p>
+
+<div>
+  <ul>
+    <% @laptops.each do |laptop| %>
+      <li>
+        <%= link_to laptop.name, laptop %>
+      </li>
+    <% end %>
+
+    <%= paginate @laptops %>
+  </ul>
+</div>
