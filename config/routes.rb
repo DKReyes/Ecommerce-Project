@@ -19,4 +19,9 @@ Rails.application.routes.draw do
   get "/about", to: "about#index"
 
   get "laptops/index"
+  resources :laptops, only: [:index, :show] do
+    collection do
+      get "search"
+    end
+  end
 end
