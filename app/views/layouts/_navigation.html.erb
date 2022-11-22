@@ -2,25 +2,29 @@
     <div class="container">
       <div class="card-image has-text-centered pt-1">
         <figure class="image is-128x128 is-inline-block">
-          <%= image_tag "main/logo_light.png", alt: "Laptop Labs"%>
+          <a  href="/">
+            <%= image_tag "main/logo_light.png", alt: "Laptop Labs"%>
+          </a>
         </figure>
       </div>
     </div>
 
     <nav class="navbar has-background-info-dark has-text-white navbar-dropdown-item-hover-black" role="navigation" aria-label="main navigation">
-      <div class="navbar-menu">
+      <div class="navbar-menu is-active">
         <div class="navbar-start">
-          <a class="navbar-item has-text-white">
+          <a class="navbar-item has-text-white has-background-info-dark"
+             href="/laptops/index">
             Products
           </a>
 
-          <a class="navbar-item has-text-white">
+          <a class="navbar-item has-text-white has-background-info-dark"
+             href="/laptops/index">
             Deals
           </a>
         </div>
 
         <div class="navbar-end">
-          <a class="navbar-item has-text-white">
+          <a class="navbar-item has-text-white has-background-info-dark">
             About
           </a>
         </div>
