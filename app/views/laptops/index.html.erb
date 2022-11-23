@@ -1,10 +1,10 @@
 <h1 class="title is-2">All Laptops</h1>
 
 
-<div>
-  <ul>
+<div class="section">
+  <ul class="is-flex is-flex-wrap-wrap">
     <% @laptops.each do |laptop| %>
-      <li>
+      <li class="column is-one-quarter">
         <%= link_to laptop.name, laptop %>
       </li>
     <% end %>
