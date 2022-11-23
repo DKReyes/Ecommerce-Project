@@ -13,13 +13,21 @@
   </head>
 
   <body>
-    <%= render "layouts/navigation" %>
+    <header>
+      <%= render "layouts/navigation" %>
+        <% if flash[:notice] %>
+          <p class="has-text-centered has-background-success has-text-white">
+            <%= flash[:notice] %>
+          </p>
+        <% end %>
+    </header>
     <div class="section">
       <div class="container">
         <%= render "layouts/search" %>
         <br>
         <%= render_breadcrumbs :separator => ' > ' %>
         <%= yield %>
+        <%= debug session[:shopping_cart] %>
       </div>
     </div>
     <%= render "layouts/footer" %>
