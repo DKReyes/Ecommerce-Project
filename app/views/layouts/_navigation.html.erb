@@ -33,6 +33,12 @@
               href="/categories/index">
             Categories
           </a>
+          <div class="navbar-item has-text-white">
+            Cart
+            <% if cart.present? %>
+              <sup> <%= cart.size %></sup>
+            <% end %>
+          </div>
         </div>
       </div>
     </nav>

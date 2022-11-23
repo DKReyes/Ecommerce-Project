@@ -7,9 +7,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
+    <script src="https://js.stripe.com/v3">
   </head>
 
   <body>
@@ -27,7 +27,6 @@
         <br>
         <%= render_breadcrumbs :separator => ' > ' %>
         <%= yield %>
-        <%= debug session[:shopping_cart] %>
       </div>
     </div>
     <%= render "layouts/footer" %>
