@@ -22,6 +22,11 @@
             $ <%= laptop.discount %>
           </p>
         <% end %>
+
+        <%= form_with url: cart_index_path, method: :post do %>
+          <%= hidden_field_tag(:id, laptop.id) %>
+          <%= button_tag 'Add to cart'  %>
+        <% end %>
       </li>
     <% end %>
 
