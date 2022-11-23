@@ -1,0 +1,13 @@
+<h1 class="title is-2">Laptop Deals</h1>
+
+
+<div>
+  <ul>
+    <% @laptops.each do |laptop| %>
+      <li>
+        <%= link_to laptop.name, laptop %>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate @laptops %>
+</div>

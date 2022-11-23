@@ -1,11 +1,35 @@
 <br>
+<br>
 <h1></h1>
 <div class="columns">
   <div class="column">
     <%= image_tag "laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example" %>
   </div>
-  <div class="column">
-    Second column
+  <div class="column section">
+    <p class="title is-3 is-spaced"> <%= @laptop.category.name %> - <%= @laptop.name%> </p>
+
+    <!-- Price -->
+    <% if @laptop.discount == @laptop.price %>
+      <p class="title is-3 has-text-primary-dark"> $ <%= @laptop.price %> </p>
+    <% else %>
+      <p class="title is-3 has-text-primary-dark">
+        <del class="has-text-danger-dark">$ <%= @laptop.price %></del> -
+        $ <%= @laptop.discount %>
+      </p>
+      <p class="subtitle is-6 has-text-primary-dark">Saving $ <%= @laptop.price - @laptop.discount %></p>
+    <% end %>
+
+    <p class="subtitle is-5"><strong>Laptop Information:</strong></p>
+
+    <ul>
+      <li><strong>Processor (CPU):</strong> <%= @laptop.cpu %></li>
+      <li><strong>Graphics Card (GPU): </strong><%= @laptop.gpu %></li>
+      <li><strong>Disk Space:</strong> <%= @laptop.storage %></li>
+      <li><strong>Display (Monitor Size):</strong> <%= @laptop.display %>"</li>
+    </ul>
+    <br>
+
+    <p class="subtitle is-5">Remaining Stock: <strong class="has-text-primary-dark"><%= @laptop.stock %></strong></p>
   </div>
 </div>
 
