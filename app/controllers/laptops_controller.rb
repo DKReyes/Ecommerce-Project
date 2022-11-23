@@ -3,7 +3,15 @@ class LaptopsController < ApplicationController
 
   def index
     add_breadcrumb "Laptops", "index"
-    @laptops = Laptop.page(params[:page])
+
+    @x = 0
+    if @x == 0
+      @laptops = Laptop.page(params[:page])
+    elsif @x == 1
+      @laptops = Laptop.where("created_at >= ? AND created_at <= Date.today-3", Date.today).page(params[:page])
+    elsif @x == 2
+      @laptops = Laptop.where("updated_at >= ? AND updated_at <= ?", Date.today, Date.today).page(params[:page])
+    end
   end
 
   def show

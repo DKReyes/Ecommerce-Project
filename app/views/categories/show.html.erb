@@ -1,11 +1,23 @@
 <p class="title is-2">All <%= @category.name %> Items</p>
 <p class="subtitle is-4"><%= @laptops.count %> Search Results Found.</p>
 
-<div>
-  <ul>
+<div class="section">
+  <ul class="is-flex is-flex-wrap-wrap">
     <% @laptops.each do |laptop| %>
-      <li>
-        <%= link_to laptop.name, laptop %>
+      <li class="column is-one-quarter">
+        <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+        <strong>
+          <%= link_to laptop.name, laptop, {:style=>'text-decoration:none;', :class => "has-text-black"} %>
+        </strong>
+
+        <% if laptop.discount == laptop.price %>
+          <p class="has-text-primary-dark"> $ <%= laptop.price %> </p>
+        <% else %>
+          <p class=" has-text-primary-dark">
+            <del class="has-text-danger-dark">$ <%= laptop.price %></del> -
+            $ <%= laptop.discount %>
+          </p>
+        <% end %>
       </li>
     <% end %>
 

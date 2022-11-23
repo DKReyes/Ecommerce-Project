@@ -1,19 +1,35 @@
 <h1 class="title is-2">Search Results</h1>
 
 <% if params[:keywords] != ""%>
-  <p>
-    Word Search Result: <%= params[:keywords] %> %>
+  <p class="subtitle is-6">
+    Word Search Result: <%= params[:keywords] %>
   </p>
 <% end %>
 
 <% if @laptops.size != 0%>
-  <ul>
-    <% @laptops.each do |laptop| %>
-      <li><%= link_to laptop.name, laptop %></li>
-    <% end %>
+  <div class="section">
+    <ul class="is-flex is-flex-wrap-wrap">
+      <% @laptops.each do |laptop| %>
+        <li class="column is-one-quarter">
+          <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+          <strong>
+            <%= link_to laptop.name, laptop, {:style=>'text-decoration:none;', :class => "has-text-black"} %>
+          </strong>
 
-    <%= paginate @laptops %>
-  </ul>
+          <% if laptop.discount == laptop.price %>
+            <p class="has-text-primary-dark"> $ <%= laptop.price %> </p>
+          <% else %>
+            <p class=" has-text-primary-dark">
+              <del class="has-text-danger-dark">$ <%= laptop.price %></del> -
+              $ <%= laptop.discount %>
+            </p>
+          <% end %>
+        </li>
+      <% end %>
+
+      <%= paginate @laptops %>
+    </ul>
+  </div>
 <% else %>
   <p>No results found.</p>
 <% end %>

@@ -1,11 +1,27 @@
 <h1 class="title is-2">All Laptops</h1>
-
+<div class="subtitle">
+  <%= button_to("All", class: "button is-primary", :onclick => @x = 0) %>
+  <%= button_to("New", class: "button is-primary", :onclick => @x = 1) %>
+  <%= submit_tag("Updated", class: "button is-primary", :onclick => @x = 2) %>
+</div>
 
 <div class="section">
   <ul class="is-flex is-flex-wrap-wrap">
     <% @laptops.each do |laptop| %>
       <li class="column is-one-quarter">
-        <%= link_to laptop.name, laptop %>
+        <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+        <strong>
+          <%= link_to laptop.name, laptop, {:style=>'text-decoration:none;', :class => "has-text-black"} %>
+        </strong>
+
+        <% if laptop.discount == laptop.price %>
+          <p class="has-text-primary-dark"> $ <%= laptop.price %> </p>
+        <% else %>
+          <p class=" has-text-primary-dark">
+            <del class="has-text-danger-dark">$ <%= laptop.price %></del> -
+            $ <%= laptop.discount %>
+          </p>
+        <% end %>
       </li>
     <% end %>
 
