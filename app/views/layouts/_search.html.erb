@@ -1,8 +1,8 @@
 
 <%= form_with(url: search_laptops_path, method: :get, local: true) do %>
   <div class="columns is-gapless">
-    <div class="column is-one-fifths">
-      <div class="select">
+    <div class="column">
+      <div class="select is-fullwidth">
         <%=
           select_tag "category",
           options_from_collection_for_select(Category.all, :id, :name),
@@ -15,8 +15,8 @@
       <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Search Product") %>
     </div>
 
-    <div class="column is-one-fifth">
-      <%= submit_tag("Search", class: "button is-primary") %>
+    <div class="column">
+      <%= submit_tag("Search", class: "button is-primary is-fullwidth") %>
     </div>
   </div>
 <% end %>

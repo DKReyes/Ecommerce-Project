@@ -33,6 +33,11 @@ laptops.each do |data|
       stock: Faker::Number.between(from: 0, to: 12),
       discount: data["discount_price"]
     )
+    # query = URI.encode_www_form_component([data["laptop_name"]])
+    # downloaded_image = URI.open("https://source.unsplash.com/600x600/?laptop")
+    # category.laptop.image.attach(io: downloaded_image,
+    #                     filename: "m-#{[data["laptop_name"], category.name].join('-')}.jpg")
+    # sleep(1)
   end
 end
 

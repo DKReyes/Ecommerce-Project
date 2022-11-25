@@ -18,6 +18,18 @@
             $ <%= laptop.discount %>
           </p>
         <% end %>
+
+        <%# Cart Add and Delete Buttons %>
+          <% if cart.include?(laptop) %>
+            <%= button_to cart_path(laptop), class: "button", method: :delete do %>
+                Remove from cart
+            <% end %>
+          <% else %>
+            <%= form_with url: cart_index_path, method: :post do %>
+              <%= hidden_field_tag(:id, laptop.id) %>
+              <%= button_tag 'Add to cart', class: "button" %>
+            <% end %>
+          <% end %>
       </li>
     <% end %>
 
