@@ -1,15 +1,19 @@
 <h1 class="title is-2">All Laptops</h1>
 <div class="subtitle">
-  <%= submit_tag("All", class: "button is-primary", :onclick => @x = 0) %>
-  <%= submit_tag("New", class: "button is-primary", :onclick => @x = 1) %>
-  <%= submit_tag("Updated", class: "button is-primary", :onclick => @x = 2) %>
+  <%= link_to submit_tag("All", class: "button is-info"), "/laptops/index"%>
+  <%= link_to submit_tag("New", class: "button is-info"), "/laptops/recent"%>
+  <%= link_to submit_tag("Updated", class: "button is-info"), "/laptops/update"%>
 </div>
 
 <div class="section">
   <ul class="is-flex is-flex-wrap-wrap">
     <% @laptops.each do |laptop| %>
       <li class="column is-one-quarter">
-        <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+        <% if laptop.image.present? %>
+          <%= link_to image_tag(laptop.image, alt: laptop.name, size:"400x600"), laptop %>
+        <% else %>
+          <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+        <% end %>
 
         <strong>
           <%= link_to laptop.name, laptop, {:style=>'text-decoration:none;', :class => "has-text-black"} %>

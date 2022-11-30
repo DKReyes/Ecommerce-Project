@@ -1,4 +1,5 @@
 class LaptopsController < ApplicationController
+  require 'date'
   add_breadcrumb "Home", :root_path
 
   def index
@@ -33,5 +34,21 @@ class LaptopsController < ApplicationController
     add_breadcrumb "Discounts", "discounts"
 
     @laptops = Laptop.where("price != discount").page(params[:page])
+  end
+
+  def recent
+    add_breadcrumb "New Laptops", "recent"
+    today = DateTime.now
+    max_day = DateTime.now - 3.day
+
+    @laptops = Laptop.where("created_at BETWEEN ? AND ?", max_day, today).page(params[:page])
+  end
+
+  def update
+    add_breadcrumb "Updated Laptops", "update"
+    today = Date.today
+    max_day = Date.today - 3.day
+
+    @laptops = Laptop.where("updated_at BETWEEN ? AND ?", max_day, today).page(params[:page])
   end
 end

@@ -1,5 +1,9 @@
-<h1 class="title is-2">Laptop Deals</h1>
-
+<h1 class="title is-2">New Laptops</h1>
+<div class="subtitle">
+  <%= link_to submit_tag("All", class: "button is-info"), "/laptops/index"%>
+  <%= link_to submit_tag("New", class: "button is-info"), "/laptops/recent"%>
+  <%= link_to submit_tag("Updated", class: "button is-info"), "/laptops/update"%>
+</div>
 
 <div class="section">
   <ul class="is-flex is-flex-wrap-wrap">

@@ -22,7 +22,7 @@ laptops.each do |data|
   category = Category.find_or_create_by(name: data["brand"])
 
   if category && category.valid?
-    category.laptop.create(
+    new_laptop = category.laptop.create(
       name: data["laptop_name"],
       cpu: data["processor_type"],
       gpu: data["graphics_card"],
@@ -33,11 +33,11 @@ laptops.each do |data|
       stock: Faker::Number.between(from: 0, to: 12),
       discount: data["discount_price"]
     )
-    # query = URI.encode_www_form_component([data["laptop_name"]])
-    # downloaded_image = URI.open("https://source.unsplash.com/600x600/?laptop")
-    # category.laptop.image.attach(io: downloaded_image,
-    #                     filename: "m-#{[data["laptop_name"], category.name].join('-')}.jpg")
-    # sleep(1)
+    # Attach image
+    query = URI.encode_www_form_component(data["laptop_name"])
+    downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{query}")
+    new_laptop.image.attach(io: downloaded_image, filename: "m-#{data["laptop_name"]}.jpg")
+    sleep(1)
   end
 end
 

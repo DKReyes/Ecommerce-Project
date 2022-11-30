@@ -11,7 +11,11 @@
     <ul class="is-flex is-flex-wrap-wrap">
       <% @laptops.each do |laptop| %>
         <li class="column is-one-quarter">
-          <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+          <% if laptop.image.present? %>
+            <%= link_to image_tag(laptop.image, alt: laptop.name, size:"400x600"), laptop %>
+          <% else %>
+            <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+          <% end %>
           <strong>
             <%= link_to laptop.name, laptop, {:style=>'text-decoration:none;', :class => "has-text-black"} %>
           </strong>

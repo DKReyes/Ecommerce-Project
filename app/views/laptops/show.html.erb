@@ -3,7 +3,11 @@
 <h1></h1>
 <div class="columns">
   <div class="column">
-    <%= image_tag "laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example" %>
+    <% if @laptop.image.present? %>
+      <%= link_to image_tag(@laptop.image, alt: @laptop.name, size:"400x600"), @laptop %>
+    <% else %>
+      <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+    <% end %>
   </div>
   <div class="column section">
     <p class="title is-3 is-spaced"> <%= @laptop.category.name %> - <%= @laptop.name%> </p>
@@ -30,6 +34,17 @@
     <br>
 
     <p class="subtitle is-5">Remaining Stock: <strong class="has-text-primary-dark"><%= @laptop.stock %></strong></p>
+
+    <% if cart.include?(@laptop) %>
+      <%= button_to cart_path(@laptop), class: "button", method: :delete do %>
+          Remove from cart
+      <% end %>
+    <% else %>
+      <%= form_with url: cart_index_path, method: :post do %>
+        <%= hidden_field_tag(:id, @laptop.id) %>
+        <%= button_tag 'Add to cart', class: "button" %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

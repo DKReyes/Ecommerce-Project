@@ -5,7 +5,15 @@ ActiveAdmin.register Laptop do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :cpu, :gpu, :storage, :display, :price, :stock, :discount, :category_id
+  permit_params :name, :cpu, :gpu, :storage, :display, :price, :stock, :discount, :category_id, :image
+  form do |f|
+    f.semantic_errors
+    f.inputs
+    f.inputs do
+      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, size:"200x200") : ""
+    end
+    f.actions
+  end
   #
   # or
   #

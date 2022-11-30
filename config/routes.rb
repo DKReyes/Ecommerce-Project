@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get "laptops/index"
   get "laptops/discounts"
+  get "laptops/recent"
+  get "laptops/update"
   resources :laptops, only: [:index, :show] do
     collection do
       get "search"
