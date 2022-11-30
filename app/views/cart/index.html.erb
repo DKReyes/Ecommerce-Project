@@ -1,0 +1,54 @@
+<h1 class="title is-2">Shopping Cart</h1>
+
+<% if cart.present? %>
+  <% cart.each do |laptop| %>
+    <div class="section box columns">
+      <div class="column is-one-fifth">
+        <% if laptop.image.present? %>
+          <%= link_to image_tag(laptop.image, alt: laptop.name, size:"200x200"), laptop %>
+        <% else %>
+          <%= link_to image_tag("laptops/laptop_example.jpg", height: 200, width: 200, alt: "laptop_example"), laptop %>
+        <% end %>
+      </div>
+
+      <div class="column is-three-fifth">
+        <p class="title is-3"><%= laptop.name %></p>
+        <ul>
+          <li><strong>Processor (CPU):</strong> <%= laptop.cpu %></li>
+          <li><strong>Graphics Card (GPU): </strong><%= laptop.gpu %></li>
+          <li><strong>Disk Space:</strong> <%= laptop.storage %></li>
+          <li><strong>Display (Monitor Size):</strong> <%= laptop.display %>"</li>
+        </ul>
+
+        <br>
+        <div class="is-flex wrap">
+          <div class="mgr-small">
+            <%= button_to "Remove from Cart", cart_path(laptop), class: "button", method: :delete %>
+          </div>
+          <div class="ml-1 mt-2">
+            <p>
+              <strong>Quantity:</strong>
+
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-fifth">
+        <% if laptop.discount == laptop.price %>
+          <p class="title is-4 has-text-primary-dark"> $ <%= laptop.price %> </p>
+        <% else %>
+          <p class="title is-4 has-text-primary-dark">
+            <del class="has-text-danger-dark">$ <%= laptop.price %></del> -
+            $ <%= laptop.discount %>
+          </p>
+          <p class="subtitle is-6 has-text-primary-dark">Saving $ <%= laptop.price - laptop.discount %></p>
+        <% end %>
+
+
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>Cart is empty.</p>
+<% end %>

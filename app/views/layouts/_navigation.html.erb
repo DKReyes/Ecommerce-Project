@@ -34,7 +34,10 @@
             Categories
           </a>
           <div class="navbar-item has-text-white">
-            Cart
+            <a class="has-text-white has-background-info-dark" style="text-decoration:none"
+              href="/cart/index">
+              Cart
+            </a>
             <% if cart.present? %>
               <sup> <%= cart.size %></sup>
             <% end %>

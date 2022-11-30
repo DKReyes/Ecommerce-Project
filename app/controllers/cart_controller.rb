@@ -21,4 +21,8 @@ class CartController < ApplicationController
     redirect_to root_path
     flash[:notice] = " [ #{laptop.name} ] Removed from cart."
   end
+
+  def index
+
+  end
 end
