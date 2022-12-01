@@ -5,7 +5,7 @@
     <div class="section box columns">
       <div class="column is-one-fifth">
         <% if laptop.image.present? %>
-          <%= link_to image_tag(laptop.image, alt: laptop.name, size:"200x200"), laptop %>
+          <%= link_to image_tag(laptop.image.variant(resize_to_limit: [285, 285]).processed, alt: laptop.name), laptop %>
         <% else %>
           <%= link_to image_tag("laptops/laptop_example.jpg", height: 200, width: 200, alt: "laptop_example"), laptop %>
         <% end %>

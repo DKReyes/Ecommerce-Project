@@ -15,12 +15,14 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification has-background-info-light">
           <!-- If User Exist Say this else say other -->
-          <%  %>
-            <%# <p class="title">Hello User!</p>
-            <p class="subtitle"></p> %>
-          <% %>
+          <% if user_signed_in? %>
+            <p class="title">Hello <%= current_user.email %>!</p>
+            <p class="subtitle">Enjoy your shopping!</p>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+          <% else %>
             <p class="title">Shopping? Sign In</p>
-            <p class="subtitle">Click to sign in.</p>
+            <p class="subtitle">Click me to sign in.</p>
+          <% end %>
         </article>
       </div>
       <div class="tile is-parent">
@@ -54,16 +56,4 @@
       </div>
     </article>
   </div>
-</div>
-
-<div>
-  <ul>
-    <% @laptops.each do |laptop| %>
-      <li>
-        <%= laptop.name %>
-      </li>
-    <% end %>
-
-    <%= paginate @laptops %>
-  </ul>
 </div>
