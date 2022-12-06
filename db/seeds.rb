@@ -12,7 +12,12 @@ require 'faker'
 AdminUser.destroy_all
 Laptop.destroy_all
 Category.destroy_all
+OrderDetail.destroy_all
+Order.destroy_all
+User.destroy_all
+Province.destroy_all
 
+# First CSV file with the laptops product
 csv_file = Rails.root.join('db/Final_Dataframe.csv')
 csv_data = File.read(csv_file)
 
@@ -39,6 +44,20 @@ laptops.each do |data|
     new_laptop.image.attach(io: downloaded_image, filename: "m-#{data["laptop_name"]}.jpg")
     sleep(1)
   end
+end
+
+# Loop through the rows of province CSV file.
+second_csv_file = Rails.root.join("db/province_tax.csv")
+second_csv_data = File.read(second_csv_file)
+
+provinces = CSV.parse(second_csv_data, headers: true)
+
+provinces.each do |province|
+  new_province = Province.find_or_create_by(name: province["Province"])
+  new_province.PST = province["PST"]
+  new_province.GST = province["GST"]
+  new_province.HST = province["HST"]
+  new_province.save!
 end
 
 # laptops.each do |data|
