@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_30_201543) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_06_160631) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -71,17 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_201543) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "customers", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
-    t.boolean "admin"
-    t.string "address"
-    t.string "phone_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "laptops", force: :cascade do |t|
     t.string "name"
     t.string "cpu"
@@ -105,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_201543) do
     t.decimal "discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "total"
     t.index ["laptops_id"], name: "index_order_details_on_laptops_id"
     t.index ["orders_id"], name: "index_order_details_on_orders_id"
   end
@@ -112,10 +102,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_201543) do
   create_table "orders", force: :cascade do |t|
     t.decimal "price_total"
     t.string "status"
-    t.integer "customers_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customers_id"], name: "index_orders_on_customers_id"
+    t.string "payment"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.decimal "pst"
+    t.decimal "gst"
+    t.decimal "hst"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -126,7 +126,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_201543) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "province_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["province_id"], name: "index_users_on_province_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -135,5 +137,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_201543) do
   add_foreign_key "laptops", "categories"
   add_foreign_key "order_details", "laptops", column: "laptops_id"
   add_foreign_key "order_details", "orders", column: "orders_id"
-  add_foreign_key "orders", "customers", column: "customers_id"
+  add_foreign_key "orders", "users"
+  add_foreign_key "users", "provinces"
 end
