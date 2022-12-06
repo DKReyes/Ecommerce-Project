@@ -2,6 +2,18 @@ class ApplicationController < ActionController::Base
   before_action :Initialize_session
   helper_method :cart
 
+  protect_from_forgery with: :exception
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(:province_id, :email, :password, :current_password)
+    end
+  end
+
   private
   def Initialize_session
     # Will Initialize the visit count to zero for new users.
