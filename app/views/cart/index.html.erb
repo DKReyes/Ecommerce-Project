@@ -5,7 +5,7 @@
     <div class="section box columns">
       <div class="column is-one-fifth">
         <% if laptop.image.present? %>
-          <%= link_to image_tag(laptop.image.variant(resize_to_limit: [285, 285]).processed, alt: laptop.name), laptop %>
+          <%= link_to image_tag(laptop.image, alt: laptop.name, size:"200x200"), laptop %>
         <% else %>
           <%= link_to image_tag("laptops/laptop_example.jpg", height: 200, width: 200, alt: "laptop_example"), laptop %>
         <% end %>
@@ -35,6 +35,7 @@
       </div>
 
       <div class="column is-one-fifth">
+        <p class="title is-4">Stock Price:</p>
         <% if laptop.discount == laptop.price %>
           <p class="title is-4 has-text-primary-dark"> $ <%= laptop.price %> </p>
         <% else %>
@@ -44,11 +45,19 @@
           </p>
           <p class="subtitle is-6 has-text-primary-dark">Saving $ <%= laptop.price - laptop.discount %></p>
         <% end %>
-
+        <p class="title is-4">Quantity Price:</p>
 
       </div>
     </div>
   <% end %>
+  <div class="section box columns">
+    <div class="column">
+      <p class="title is-4">Subtotal:</p>
+    </div>
+    <div class="column">
+      <p class="title is-4 has-text-right">$ #####.##</p>
+    </div>
+  </div>
 <% else %>
   <p>Cart is empty.</p>
 <% end %>

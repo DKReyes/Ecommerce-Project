@@ -18,7 +18,9 @@
           <% if user_signed_in? %>
             <p class="title">Hello <%= current_user.email %>!</p>
             <p class="subtitle">Enjoy your shopping!</p>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+            <div class="is-flex is-align-items-flex-end">
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+            </div>
           <% else %>
             <p class="title">Shopping? Sign In</p>
             <p class="subtitle">Click me to sign in.</p>
@@ -26,17 +28,21 @@
         </article>
       </div>
       <div class="tile is-parent">
-        <article class="tile is-child notification has-background-white-ter">
+        <article class="tile is-child notification has-background-info-light">
           <p class="title">Laptop Showcase</p>
-          <p class="subtitle">Insert random laptop</p>
+          <p class="subtitle"><%= @laptop.name %></p>
           <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/640x480.png">
+            <% if @laptop.image.present? %>
+              <%= link_to image_tag(@laptop.image, alt: @laptop.name, size:"400x600"), @laptop %>
+            <% else %>
+              <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), @laptop %>
+            <% end %>
           </figure>
         </article>
       </div>
     </div>
     <div class="tile is-parent">
-      <article class="tile is-child notification has-background-white-ter">
+      <article class="tile is-child notification has-background-info-light">
         <p class="title">Looking for Deals?</p>
         <p class="subtitle">Click Me or visit the deals page via the navigation.</p>
         <div class="content">
@@ -46,7 +52,7 @@
     </div>
   </div>
   <div class="tile is-parent">
-    <article class="tile is-child notification has-background-white-ter">
+    <article class="tile is-child notification has-background-info-light">
       <div class="content">
         <p class="title"></p>
         <p class="subtitle"></p>
