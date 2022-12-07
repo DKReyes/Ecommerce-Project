@@ -89,20 +89,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_170040) do
   create_table "order_details", force: :cascade do |t|
     t.decimal "price"
     t.integer "quantity"
-    t.integer "orders_id", null: false
-    t.integer "laptops_id", null: false
+    t.integer "order_id", null: false
+    t.integer "laptop_id", null: false
     t.decimal "discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "total"
-    t.index ["laptops_id"], name: "index_order_details_on_laptops_id"
-    t.index ["orders_id"], name: "index_order_details_on_orders_id"
+    t.index ["laptop_id"], name: "index_order_details_on_laptop_id"
+    t.index ["order_id"], name: "index_order_details_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.decimal "price_total"
     t.string "status"
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "payment"
@@ -126,7 +126,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_170040) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "province_id", null: false
+    t.integer "province_id"
     t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["province_id"], name: "index_users_on_province_id"
@@ -136,8 +136,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_170040) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "laptops", "categories"
-  add_foreign_key "order_details", "laptops", column: "laptops_id"
-  add_foreign_key "order_details", "orders", column: "orders_id"
+  add_foreign_key "order_details", "laptops"
+  add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "users", "provinces"
 end

@@ -5,14 +5,8 @@ class LaptopsController < ApplicationController
   def index
     add_breadcrumb "Laptops", "index"
 
-    @x = 0
-    if @x == 0
-      @laptops = Laptop.page(params[:page])
-    elsif @x == 1
-      @laptops = Laptop.where("created_at >= ? AND created_at <= Date.today-3", Date.today).page(params[:page])
-    elsif @x == 2
-      @laptops = Laptop.where("updated_at >= ? AND updated_at <= ?", Date.today, Date.today).page(params[:page])
-    end
+    @laptops = Laptop.page(params[:page])
+    # @order_detail = current_order.order_details.new
   end
 
   def show
@@ -20,6 +14,7 @@ class LaptopsController < ApplicationController
     @laptop = Laptop.includes(:category).find(params[:id])
     add_breadcrumb @laptop.category.name, "/categories/" + @laptop.category.id.to_s
     add_breadcrumb @laptop.name, "/laptops/" + @laptop.id.to_s
+    # @order_detail = current_order.order_details.new
   end
 
   def search
@@ -27,6 +22,7 @@ class LaptopsController < ApplicationController
     wildcard_search2 = "%#{params[:category]}%"
 
     @laptops = Laptop.where("name LIKE ? AND category_id LIKE ?", wildcard_search, wildcard_search2).page(params[:page])
+    # @order_detail = current_order.order_details.new
   end
 
   def discounts
@@ -34,6 +30,7 @@ class LaptopsController < ApplicationController
     add_breadcrumb "Discounts", "discounts"
 
     @laptops = Laptop.where("price != discount").page(params[:page])
+    # @order_detail = current_order.order_details.new
   end
 
   def recent
@@ -42,6 +39,7 @@ class LaptopsController < ApplicationController
     max_day = DateTime.now - 3.day
 
     @laptops = Laptop.where("created_at BETWEEN ? AND ?", max_day, today).page(params[:page])
+    # @order_detail = current_order.order_details.new
   end
 
   def update
@@ -50,5 +48,6 @@ class LaptopsController < ApplicationController
     max_day = Date.today - 3.day
 
     @laptops = Laptop.where("updated_at BETWEEN ? AND ?", max_day, today).page(params[:page])
+    # @order_detail = current_order.order_details.new
   end
 end

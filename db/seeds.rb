@@ -9,42 +9,42 @@
 require 'csv'
 require 'faker'
 
-# AdminUser.destroy_all
-# Laptop.destroy_all
-# Category.destroy_all
+AdminUser.destroy_all
+Laptop.destroy_all
+Category.destroy_all
 OrderDetail.destroy_all
 Order.destroy_all
 User.destroy_all
 Province.destroy_all
 
 # First CSV file with the laptops product
-# csv_file = Rails.root.join('db/Final_Dataframe.csv')
-# csv_data = File.read(csv_file)
+csv_file = Rails.root.join('db/Final_Dataframe.csv')
+csv_data = File.read(csv_file)
 
-# laptops = CSV.parse(csv_data, headers: true)
+laptops = CSV.parse(csv_data, headers: true)
 
-# laptops.each do |data|
-#   category = Category.find_or_create_by(name: data["brand"])
+laptops.each do |data|
+  category = Category.find_or_create_by(name: data["brand"])
 
-#   if category && category.valid?
-#     new_laptop = category.laptop.create(
-#       name: data["laptop_name"],
-#       cpu: data["processor_type"],
-#       gpu: data["graphics_card"],
-#       storage: data["disk_space"],
-#       display: data["display_size"],
-#       # photo: Faker::LoremFlickr.image(size: "50x60", search_terms: ['laptops'])
-#       price: data["old_price"],
-#       stock: Faker::Number.between(from: 0, to: 12),
-#       discount: data["discount_price"]
-#     )
-#     # Attach image
-#     query = URI.encode_www_form_component(data["laptop_name"])
-#     downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{query}")
-#     new_laptop.image.attach(io: downloaded_image, filename: "m-#{data["laptop_name"]}.jpg")
-#     sleep(1)
-#   end
-# end
+  if category && category.valid?
+    new_laptop = category.laptop.create(
+      name: data["laptop_name"],
+      cpu: data["processor_type"],
+      gpu: data["graphics_card"],
+      storage: data["disk_space"],
+      display: data["display_size"],
+      # photo: Faker::LoremFlickr.image(size: "50x60", search_terms: ['laptops'])
+      price: data["old_price"],
+      stock: Faker::Number.between(from: 0, to: 12),
+      discount: data["discount_price"]
+    )
+    # Attach image
+    query = URI.encode_www_form_component(data["laptop_name"])
+    downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{query}")
+    new_laptop.image.attach(io: downloaded_image, filename: "m-#{data["laptop_name"]}.jpg")
+    sleep(1)
+  end
+end
 
 # Loop through the rows of province CSV file.
 second_csv_file = Rails.root.join("db/province_tax.csv")

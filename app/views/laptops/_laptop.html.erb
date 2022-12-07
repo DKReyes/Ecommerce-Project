@@ -24,9 +24,11 @@
           Remove from cart
       <% end %>
     <% else %>
-      <%= form_with url: cart_index_path, method: :post do %>
-        <%= hidden_field_tag(:id, laptop.id) %>
-        <%= button_tag 'Add to cart', class: "button" %>
+      <%= form_with model: @order_detail do |f| %>
+        <%= f.hidden_field :laptops_id, value: laptop.id %>
+        <%= f.hidden_field :quantity, value: 1, min: 1, :class => "" %>
+        <%= f.submit "Add to Cart", :class => "button" %>
       <% end %>
+
     <% end %>
 </li>

@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   resources :cart, only: %i[create destroy]
   get "cart/index"
 
+  resources :order_details
+
   # /checkout/success
   # /checkout/create
   # /checkout/cancel

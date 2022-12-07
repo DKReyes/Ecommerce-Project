@@ -1,7 +1,7 @@
 class Laptop < ApplicationRecord
   default_per_page
 
-  has_many :order
+  has_many :order_details
   belongs_to :category
   has_one_attached :image
 
