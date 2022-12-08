@@ -65,4 +65,15 @@
       <button class="button is-large has-background-warning-light">Checkout</button>
     </div>
   </div>
+  <% if current_order.order_details.present? %>
+    <%= form_with(url: checkout_create_path, remote: true) do |f| %>
+      <%= f.label :province_id, :class => "form-label" %>
+      <% if user_signed_in? %>
+        <%= f.select(:province_id, options_for_select(Province.all.collect {|p| [ p.name, p.id ] }, current_user.province_id), { include_blank: true }, :required => 'required',  :class => 'form')%>
+      <% else %>
+        <%= f.select(:province_id, options_for_select(Province.all.collect {|p| [ p.name, p.id ] }), { include_blank: true }, :required => 'required',  :class => 'form')%>
+      <% end %>
+      <%= f.submit "Checkout Now!", data: { turbo: false }, :class => "button" %>
+    <% end %>
+  <% end %>
 </div>

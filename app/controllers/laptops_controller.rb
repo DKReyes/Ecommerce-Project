@@ -50,4 +50,6 @@ class LaptopsController < ApplicationController
     @laptops = Laptop.where("updated_at BETWEEN ? AND ?", max_day, today).page(params[:page])
     @order_detail = current_order.order_details.new
   end
+
+
 end

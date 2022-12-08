@@ -20,12 +20,12 @@ class OrderDetail < ApplicationRecord
     return price * quantity
   end
 
-  # # def to_builder
-  # #   Jbuilder.new do |item|
-  # #     item.quantity quantity
-  # #     item.price_data laptop.to_builder
-  # #   end
-  # # end
+  def to_builder
+    Jbuilder.new do |item|
+      item.quantity quantity
+      item.price_data laptop.to_builder
+    end
+  end
 
   private
   def set_price

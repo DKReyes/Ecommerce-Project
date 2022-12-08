@@ -36,13 +36,18 @@ Rails.application.routes.draw do
 
   resources :order_details
 
+  get "orders/index"
+  get "orders/show"
+  get "orders/admin"
+  resources :orders
+
   # /checkout/success
   # /checkout/create
   # /checkout/cancel
 
   scope "/checkout" do
     post "create", to: "checkout#create", as: "checkout_create"
-    get "sucess", to: "checkout#success", as: "checkout_sucess"
+    get "sucess", to: "checkout#success", as: "checkout_success"
     get "cancel", to: "checkout#cancel", as: "checkout_cancel"
   end
 

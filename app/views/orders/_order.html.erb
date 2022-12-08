@@ -1,0 +1,4 @@
+  <th scope="row"><%= link_to order.id, order, :class => "" %></th>
+  <td><%= order.payment %></td>
+  <%= number_to_currency order.price_total %>
+  <%= order.status %>
