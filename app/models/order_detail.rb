@@ -1,24 +1,24 @@
 class OrderDetail < ApplicationRecord
   belongs_to :order
-  belongs_to :laptops
+  belongs_to :laptop
 
-  validates :price, :quantity, presence: true
-  validates :quantity, numericality: {only_integer: true}
+  # validates :price, :quantity, presence: true
+  # validates :quantity, numericality: {only_integer: true}
 
-  # before_save :set_unit_price
-  # before_save :set_total
+  before_save :set_price
+  before_save :set_total
 
-  # def unit_price
-  #   if persisted?
-  #     self[:unit_price]
-  #   else
-  #     laptop.price
-  #   end
-  # end
+  def price
+    if persisted?
+      self[:price]
+    else
+      laptop.price
+    end
+  end
 
-  # def total
-  #   return unit_price * quantity
-  # end
+  def total
+    return price * quantity
+  end
 
   # # def to_builder
   # #   Jbuilder.new do |item|
@@ -27,13 +27,12 @@ class OrderDetail < ApplicationRecord
   # #   end
   # # end
 
-  # private
+  private
+  def set_price
+    self[:price] = price
+  end
 
-  # def set_unit_price
-  #   self[:unit_price] = unit_price
-  # end
-
-  # def set_total
-  #   self[:total] = total * quantity
-  # end
+  def set_total
+    self[:total] = total * quantity
+  end
 end

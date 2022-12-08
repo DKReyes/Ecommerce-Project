@@ -26,14 +26,14 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    if session[:orders_id]
-      @current_order ||= Order.find(session[:orders_id])
-      session[:orders_id] = nil if @current_order.status
+    if session[:order_id]
+      @current_order ||= Order.find(session[:order_id])
+      session[:order_id] = nil if @current_order.status
     end
 
-    if session[:orders_id].nil?
+    if session[:order_id].nil?
       @current_order = Order.create!
-      session[:orders_id] = @current_order.id
+      session[:order_id] = @current_order.id
     end
 
     @current_order

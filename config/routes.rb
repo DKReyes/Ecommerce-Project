@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   resources :cart, only: %i[create destroy]
   get "cart/index"
+  get "cart/show"
 
   resources :order_details
 

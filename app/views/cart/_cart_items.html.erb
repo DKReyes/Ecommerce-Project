@@ -1,0 +1,68 @@
+<h1 class="title is-2">Shopping Cart</h1>
+
+<% @order_details.each do |order| %>
+  <div class="section box columns">
+    <div class="column is-one-fifth">
+      <% if order.laptop.image.present? %>
+        <%= link_to image_tag(order.laptop.image, alt: order.laptop.name, size:"200x200"), order.laptop %>
+      <% else %>
+        <%= link_to image_tag("laptops/laptop_example.jpg", height: 200, width: 200, alt: "laptop_example"), order.laptop %>
+      <% end %>
+    </div>
+
+
+    <div class="column is-three-fifth">
+      <p class="title is-3"><%= order.laptop.name %></p>
+        <ul>
+          <li><strong>Processor (CPU):</strong> <%= order.laptop.cpu %></li>
+          <li><strong>Graphics Card (GPU): </strong><%= order.laptop.gpu %></li>
+          <li><strong>Disk Space:</strong> <%= order.laptop.storage %></li>
+          <li><strong>Display (Monitor Size):</strong> <%= order.laptop.display %>"</li>
+        </ul>
+
+        <br>
+        <%= form_with model: order do |i| %>
+          <%= i.hidden_field :laptops_id, value: order.laptop.id %>
+          <div class="columns">
+            <div class="column is-two-fifths">
+              <%= i.number_field :quantity, value: order.quantity.to_i, :class => "input" %>
+              <%= i.submit "Update Cart", :class => "button has-background-success-light" %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= form_with(url: order_detail_path(order), method: :delete, remote: true) do |i| %>
+          <td><%= i.submit "Remove", :class => "button has-background-danger-light" %></td>
+        <% end %>
+    </div>
+
+    <div class="column is-one-fifth">
+      <p class="title is-4">Stock Price:</p>
+      <% if order.laptop.discount == order.laptop.price %>
+        <p class="title is-4 has-text-primary-dark"> $ <%= order.laptop.price %> </p>
+      <% else %>
+        <p class="title is-4 has-text-primary-dark">
+          <del class="has-text-danger-dark">$ <%= order.laptop.price %></del> -
+          $ <%= order.laptop.discount %>
+        </p>
+        <p class="subtitle is-6 has-text-primary-dark">Saving $ <%= order.laptop.price - order.laptop.discount %></p>
+      <% end %>
+      <p class="title is-4">Quantity Price:</p>
+      <p class="title is-4">$ <%= order.total %></p>
+
+    </div>
+  </div>
+<% end %>
+
+<div class="section box columns">
+  <div class="column">
+    <p class="title is-4">Subtotal:</p>
+    <p class="title is-4">Checkout</p>
+  </div>
+  <div class="column">
+    <p class="title is-4 has-text-right">$ <%= current_order.price_total %></p>
+    <div class="buttons is-right">
+      <button class="button is-large has-background-warning-light">Checkout</button>
+    </div>
+  </div>
+</div>
