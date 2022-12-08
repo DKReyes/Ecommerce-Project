@@ -25,7 +25,7 @@
           <%= i.hidden_field :laptops_id, value: order.laptop.id %>
           <div class="columns">
             <div class="column is-two-fifths">
-              <%= i.number_field :quantity, value: order.quantity.to_i, :class => "input" %>
+              <%= i.number_field :quantity, value: order.quantity.to_i, min: 1, max: order.laptop.stock, :class => "input" %>
               <%= i.submit "Update Cart", :class => "button has-background-success-light" %>
             </div>
           </div>

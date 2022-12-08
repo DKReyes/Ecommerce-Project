@@ -35,16 +35,17 @@
 
     <p class="subtitle is-5">Remaining Stock: <strong class="has-text-primary-dark"><%= @laptop.stock %></strong></p>
 
-    <% if cart.include?(@laptop) %>
-      <%= button_to cart_path(@laptop), class: "button", method: :delete do %>
-          Remove from cart
-      <% end %>
-    <% else %>
-      <%= form_with url: cart_index_path, method: :post do %>
-        <%= hidden_field_tag(:id, @laptop.id) %>
-        <%= button_tag 'Add to cart', class: "button" %>
-      <% end %>
+  <% if @current_order.order_details.where(laptop_id: @laptop.id).first.present? %>
+    <%= form_with(url:order_detail_path(@current_order.order_details.where(laptop_id: @laptop.id).first), method: :delete) do |i| %>
+      <%= i.submit "Remove from cart", :class => "button" %>
     <% end %>
+  <% else %>
+    <%= form_with(url: order_details_path, model: @order_detail, method: :post, remote: true) do |f| %>
+      <%= f.hidden_field :laptop_id, value: @laptop.id %>
+      <%= f.number_field :quantity, value: 1, min: 1, max: @laptop.stock, :class => "input" %>
+      <%= f.submit "Add to Cart", :class => "button" %>
+    <% end %>
+  <% end %>
   </div>
 </div>
 

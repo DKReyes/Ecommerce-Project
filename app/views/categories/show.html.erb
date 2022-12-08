@@ -4,21 +4,39 @@
 <div class="section">
   <ul class="is-flex is-flex-wrap-wrap">
     <% @laptops.each do |laptop| %>
-      <li class="column is-one-quarter">
-        <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
-        <strong>
-          <%= link_to laptop.name, laptop, {:style=>'text-decoration:none;', :class => "has-text-black"} %>
-        </strong>
+<li class="column is-one-quarter">
+  <% if laptop.image.present? %>
+    <%= link_to image_tag(laptop.image, alt: laptop.name, size:"400x600"), laptop %>
+  <% else %>
+    <%= link_to image_tag("laptops/laptop_example.jpg", height: 500, width: 500, alt: "laptop_example"), laptop %>
+  <% end %>
 
-        <% if laptop.discount == laptop.price %>
-          <p class="has-text-primary-dark"> $ <%= laptop.price %> </p>
-        <% else %>
-          <p class=" has-text-primary-dark">
-            <del class="has-text-danger-dark">$ <%= laptop.price %></del> -
-            $ <%= laptop.discount %>
-          </p>
-        <% end %>
-      </li>
+  <strong>
+    <%= link_to laptop.name, laptop, {:style=>'text-decoration:none;', :class => "has-text-black"} %>
+  </strong>
+
+  <% if laptop.discount == laptop.price %>
+    <p class="has-text-primary-dark"> $ <%= laptop.price %> </p>
+  <% else %>
+    <p class=" has-text-primary-dark">
+      <del class="has-text-danger-dark">$ <%= laptop.price %></del> -
+      $ <%= laptop.discount %>
+    </p>
+  <% end %>
+
+  <%# Cart Add and Delete Buttons %>
+  <% if current_order.order_details.where(laptop_id: laptop.id).first.present? %>
+    <%= form_with(url:order_detail_path(current_order.order_details.where(laptop_id: laptop.id).first), method: :delete) do |i| %>
+      <%= i.submit "Remove from cart", :class => "button" %>
+    <% end %>
+  <% else %>
+    <%= form_with(url: order_details_path, model: @order_detail, method: :post, remote: true) do |f| %>
+      <%= f.hidden_field :laptop_id, value: laptop.id %>
+      <%= f.number_field :quantity, value: 1, min: 1, max: laptop.stock, :class => "input" %>
+      <%= f.submit "Add to Cart", :class => "button" %>
+    <% end %>
+  <% end %>
+</li>
     <% end %>
 
     <%= paginate @laptops %>

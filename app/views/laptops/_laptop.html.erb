@@ -26,7 +26,7 @@
   <% else %>
     <%= form_with(url: order_details_path, model: @order_detail, method: :post, remote: true) do |f| %>
       <%= f.hidden_field :laptop_id, value: laptop.id %>
-      <%= f.number_field :quantity, value: 1, min: 1, :class => "input" %>
+      <%= f.number_field :quantity, value: 1, min: 1, max: laptop.stock, :class => "input" %>
       <%= f.submit "Add to Cart", :class => "button" %>
     <% end %>
   <% end %>
