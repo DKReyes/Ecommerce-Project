@@ -47,17 +47,18 @@ laptops.each do |data|
 end
 
 # Loop through the rows of province CSV file.
-second_csv_file = Rails.root.join("db/province_tax.csv")
+second_csv_file = Rails.root.join("db/Provinces.csv")
 second_csv_data = File.read(second_csv_file)
 
 provinces = CSV.parse(second_csv_data, headers: true)
 
 provinces.each do |province|
-  new_province = Province.find_or_create_by(name: province["Province"])
-  new_province.pst = province["PST"]
-  new_province.gst = province["GST"]
-  new_province.hst = province["HST"]
-  new_province.save!
+  new_province = Province.create(
+    name: province["Province"],
+    gst: province["GST"],
+    pst: province["PST"],
+    hst: province["HST"]
+    )
 end
 
 # laptops.each do |data|

@@ -57,23 +57,24 @@
 <div class="section box columns">
   <div class="column">
     <p class="title is-4">Subtotal:</p>
-    <p class="title is-4">Checkout</p>
   </div>
   <div class="column">
     <p class="title is-4 has-text-right">$ <%= current_order.price_total %></p>
     <div class="buttons is-right">
-      <button class="button is-large has-background-warning-light">Checkout</button>
+        <% if current_order.order_details.present? %>
+          <%= form_with(url: checkout_create_path, remote: true) do |f| %>
+            <%= f.label :province_id, :class => "title is-5" %>
+            <br>
+            <% if user_signed_in? %>
+              <%= f.select(:province_id, options_for_select(Province.all.collect {|p| [ p.name, p.id ] }, current_user.province_id), { include_blank: true }, :required => 'required',  :class => 'select')%>
+            <% else %>
+              <%= f.select(:province_id, options_for_select(Province.all.collect {|p| [ p.name, p.id ] }), { include_blank: true }, :required => 'required',  :class => 'select')%>
+            <% end %>
+            <br>
+            <br>
+            <%= f.submit "Checkout", data: { turbo: false }, :class => "button is-large has-background-warning-light is-left" %>
+          <% end %>
+        <% end %>
     </div>
   </div>
-  <% if current_order.order_details.present? %>
-    <%= form_with(url: checkout_create_path, remote: true) do |f| %>
-      <%= f.label :province_id, :class => "form-label" %>
-      <% if user_signed_in? %>
-        <%= f.select(:province_id, options_for_select(Province.all.collect {|p| [ p.name, p.id ] }, current_user.province_id), { include_blank: true }, :required => 'required',  :class => 'form')%>
-      <% else %>
-        <%= f.select(:province_id, options_for_select(Province.all.collect {|p| [ p.name, p.id ] }), { include_blank: true }, :required => 'required',  :class => 'form')%>
-      <% end %>
-      <%= f.submit "Checkout Now!", data: { turbo: false }, :class => "button" %>
-    <% end %>
-  <% end %>
 </div>
