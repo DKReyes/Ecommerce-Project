@@ -1,7 +1,9 @@
 class Laptop < ApplicationRecord
   default_per_page
 
+  # Many to Many connecting orders_details
   has_many :order_details
+  # One to Many relationship with category
   belongs_to :category
   has_one_attached :image
 
@@ -12,13 +14,7 @@ class Laptop < ApplicationRecord
     (self.price * 100 ).to_i
   end
 
-  def display_name
-    Jbuilder.new do |laptop|
-      laptop.name self.name
-      laptop.description self.gpu
-    end
-  end
-
+  # Stripe JBuillder
   def to_builder
     Jbuilder.new do |laptop|
       laptop.currency "cad"
@@ -30,6 +26,14 @@ class Laptop < ApplicationRecord
       end
 
       laptop.product_data self.display_name
+    end
+  end
+
+  # The display name and gpu as description for stripe
+  def display_name
+    Jbuilder.new do |laptop|
+      laptop.name self.name
+      laptop.description self.gpu
     end
   end
 end

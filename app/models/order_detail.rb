@@ -1,13 +1,13 @@
 class OrderDetail < ApplicationRecord
+
+  # Many to Many for Laptops by connecting order (see order)
   belongs_to :order
   belongs_to :laptop
-
-  # validates :price, :quantity, presence: true
-  # validates :quantity, numericality: {only_integer: true}
 
   before_save :set_price
   before_save :set_total
 
+  # Gets the Price
   def price
     if persisted?
       self[:price]
@@ -16,10 +16,12 @@ class OrderDetail < ApplicationRecord
     end
   end
 
+  # Gets the Total
   def total
     return price * quantity
   end
 
+  # Stripe Builder
   def to_builder
     Jbuilder.new do |item|
       item.quantity quantity
@@ -27,6 +29,7 @@ class OrderDetail < ApplicationRecord
     end
   end
 
+  # Sets the Price and Total
   private
   def set_price
     self[:price] = price
