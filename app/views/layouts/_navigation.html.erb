@@ -16,7 +16,7 @@
             <p class="has-text-white">
               <% if user_signed_in? %>
                 <a style="text-decoration:none" class="has-text-white" href="/users/edit"> Account  </a>
-                <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "button is-ghost has-text-white" %>|
+                <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "button is-ghost has-text-white" %>
               <% else %>
                 <%= link_to "Sign In", "/users/sign_in", class: "has-text-white" %>
               <% end %>

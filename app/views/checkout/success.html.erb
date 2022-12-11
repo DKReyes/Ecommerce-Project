@@ -1,9 +1,8 @@
-<%= debug @session %>
-<%= debug @payment_intent %>
-<% @line_items.each do |d| %>
-  <%= d.description %>
-  <%= d.price.unit_amount %>
-  <%= d.quantity %>
-  <%= d.amount_subtotal %>
+<% @line_items.each do |laptop| %>
+  <p><%= laptop.description %></p>
+  <ul>
+    <li><%= laptop.price.unit_amount %></li>
+    <li><%= laptop.quantity %></li>
+    <li><%= laptop.amount_subtotal %></li>
+  </ul>
 <% end %>
-<%= @line_items %>
